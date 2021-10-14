@@ -5,16 +5,16 @@ SRC = fdr.c
 OBJ = ${SRC:%.c=%.o}
 
 LDFLAGS=-lcurl -lcjson
-CFLAGS=-std=c99 -pedantic -Wall -Wno-deprecated-delarations
+CFLAGS=-c -fPIC -std=c99 -pedantic -Wall -Wno-deprecated-delarations
 
-all: fdr
+all: static
 
-.c.o:
-	${CC} -c ${CFLAGS} $<
+static:
+	gcc -c ${SRC} -o ${OBJ}
+	ar -rc libfdr.a ${OBJ}
 
-
-fdr: ${OBJ}
-	${CC} -o $@ ${OBJ} ${LDFLAGS}
+install: static 
+	cp libfdr.a /usr/lib/libfdr.a
 
 clean:
-	rm -f fdr fdr-${VERSION}.tar.gz *.o
+	rm -f fdr fdr-${VERSION}.tar.gz *.o *.a
