@@ -15,4 +15,6 @@ You need to set those and then call get_urls, which takes three values, the stru
 
 # installing
 
-This defaults to a static liberary because why not. run `sudo make clean install` or `doas make clean install`
+run `make static install-static` or `make dynamic install-dynamic`
+
+If you dont know just run the dynamic one, static one is a little faster but it makes no differnce
